@@ -7,11 +7,13 @@ import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.entitites.Role;
 import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.exceptions.Messages;
 import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.exceptions.UnauthorizedException;
 import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.repositories.UserJpaRepository;
+import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.util.JwtUtil;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,8 @@ public class AuthServiceImpl implements AuthService {
     private UserJpaRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public LoginResponseDto login(LoginRequestDto request) {
@@ -43,18 +47,21 @@ public class AuthServiceImpl implements AuthService {
             throw new UnauthorizedException("Credenciales inválidas");
         }
 
-        Set<String> roles = user.getRoles()
+        List<String> roles = user.getRoles()
                 .stream()
                 .map(Role::getName)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
+
+        String token = jwtUtil.generateToken(user.getId(), user.getEmail(), roles);
 
         return new LoginResponseDto(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
-                roles,
-                Messages.LOGIN_OK
+                user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()),
+                Messages.LOGIN_OK,
+                token
         );
     }
 }

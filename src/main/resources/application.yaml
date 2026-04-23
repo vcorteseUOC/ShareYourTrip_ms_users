@@ -12,3 +12,7 @@ spring:
     username: product
     password: product
     driverClassName: org.postgresql.Driver
+
+jwt:
+  secret: shareYourTripSecretKey2024ParaFirmarTokensJWTDebeSerMuyLargaParaSeguridad
+  expiration: 86400000 # 24 horas en milisegundos
