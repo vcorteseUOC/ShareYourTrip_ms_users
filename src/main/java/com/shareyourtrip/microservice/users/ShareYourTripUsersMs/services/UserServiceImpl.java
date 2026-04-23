@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Arrays.stream;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -39,5 +41,10 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UserNotFoundException(Messages.USER_NOT_FOUND.concat(" con email: " + email)));
 
         return UsersMapper.toDto(user);
+    }
+
+    @Override
+    public List<Long> getUserIdsByLanguage(String language) {
+        return userRepository.getUserIdsByLanguage(language);
     }
 }

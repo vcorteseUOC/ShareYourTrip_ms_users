@@ -59,7 +59,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @Column(name = "\"language\"")
-    private Character language;
+    private String language;
 
     @Column(name = "birth_date")
     private LocalDate birthDate;

@@ -21,7 +21,7 @@ public class UserResponseDto {
     private Boolean isActive;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Character language;
+    private String language;
     private LocalDate birthDate;
     private Set<String> roles;
 
@@ -31,7 +31,7 @@ public class UserResponseDto {
     public UserResponseDto(Long id, String firstName, String lastName, String email,
                            String phone, String profilePhotoUrl, String bio,
                            Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt,
-                           Character language, LocalDate birthDate, Set<String> roles) {
+                           String language, LocalDate birthDate, Set<String> roles) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;

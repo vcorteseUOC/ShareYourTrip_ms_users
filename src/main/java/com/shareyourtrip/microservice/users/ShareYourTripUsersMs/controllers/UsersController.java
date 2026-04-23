@@ -28,5 +28,10 @@ public class UsersController {
     public UserResponseDto getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
     }
+
+    @GetMapping("/lan/{language}")
+    public List<Long> getUserByLanguage(@PathVariable String language) {
+        return userService.getUserIdsByLanguage(language);
+    }
 }
 

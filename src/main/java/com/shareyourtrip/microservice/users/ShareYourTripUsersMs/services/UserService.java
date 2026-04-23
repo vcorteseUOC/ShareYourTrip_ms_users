@@ -11,4 +11,6 @@ public interface UserService {
     UserResponseDto getUserById(Long id);
 
     UserResponseDto getUserByEmail(String email);
+
+    List<Long> getUserIdsByLanguage(String language);
 }
