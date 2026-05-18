@@ -17,6 +17,7 @@ public class LoginResponseDto {
     private String firstName;
     private String lastName;
     private String email;
+    private String profilePhotoUrl;
     private Set<String> roles;
     private String message;
     private String token;

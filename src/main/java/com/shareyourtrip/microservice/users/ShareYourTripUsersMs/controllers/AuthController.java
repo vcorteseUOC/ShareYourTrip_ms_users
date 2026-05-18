@@ -2,6 +2,8 @@ package com.shareyourtrip.microservice.users.ShareYourTripUsersMs.controllers;
 
 import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.dtos.LoginRequestDto;
 import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.dtos.LoginResponseDto;
+import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.dtos.RegisterRequestDto;
+import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.dtos.UserResponseDto;
 import com.shareyourtrip.microservice.users.ShareYourTripUsersMs.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +22,10 @@ public class AuthController {
     @PostMapping("/login")
     public LoginResponseDto login(@Valid @RequestBody LoginRequestDto request) {
         return authService.login(request);
+    }
+
+    @PostMapping("/register")
+    public UserResponseDto register(@Valid @RequestBody RegisterRequestDto request) {
+        return authService.register(request);
     }
 }

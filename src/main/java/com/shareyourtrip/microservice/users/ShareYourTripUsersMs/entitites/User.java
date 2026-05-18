@@ -69,8 +69,14 @@ public class User {
     @JoinTable(
             name = "user_roles",
             schema = "public",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            joinColumns = @JoinColumn(
+                name = "user_id",
+                foreignKey = @ForeignKey(name = "fk_user_roles_user")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                name = "role_id",
+                foreignKey = @ForeignKey(name = "fk_user_roles_role")
+            )
     )
     private Set<Role> roles = new HashSet<>();
 
